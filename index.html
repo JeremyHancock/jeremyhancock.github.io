@@ -26,6 +26,7 @@
   --muted: #A3A9B5;
   --line: #262B39;
   --on: #0E1116;
+  --hl: #7A5B00;
 
   --t-capone: #7DB1F5;
   --t-parkers: #F2B63C;
@@ -131,11 +132,9 @@ h1 {
 }
 h1 .w { display: inline-block; animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i) * 70ms); }
 .hl {
-  color: var(--on);
-  padding-inline: 0.08em;
-  margin-inline: -0.02em;
-  border-radius: 0.12em;
-  background: linear-gradient(var(--t-parkers), var(--t-parkers)) 0 50% / 100% 86% no-repeat;
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
+  background: linear-gradient(transparent 56%, var(--hl) 56%, var(--hl) 90%, transparent 90%) 0 0 / 100% 100% no-repeat;
   animation: rise 0.9s var(--ease) both, sweep 0.8s var(--ease) 0.75s both;
   animation-delay: calc(var(--i) * 70ms), 0.75s;
 }
@@ -152,7 +151,7 @@ h1 .w { display: inline-block; animation: rise 0.9s var(--ease) both; animation-
 .ribbons canvas { display: block; width: 100%; height: clamp(190px, 27vw, 340px); }
 
 @keyframes rise { from { opacity: 0; transform: translateY(0.4em); } }
-@keyframes sweep { from { background-size: 0 86%; color: var(--ink); } }
+@keyframes sweep { from { background-size: 0 100%; } }
 @keyframes fade { from { opacity: 0; } }
 @keyframes drift { to { background-position: 200% 50%; } }
 

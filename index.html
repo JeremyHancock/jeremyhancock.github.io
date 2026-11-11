@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a night-dark page carrying five colors, one per body of work, like tracks in a
-   recording session. Work that is running gets a panel filled with its color; shelved work
-   gets the same panel in outline. The ribbons under the headline are the five colors in motion.
+   recording session. Each body of work sits in a panel outlined and tinted in its color, with
+   its commit waveform drawn in the complementary color. The ribbons under the headline are the five colors in motion.
    One look only, by choice: there is no light theme. */
 :root {
   color-scheme: dark;
@@ -33,12 +33,12 @@
   --t-agentcafe: #B79BF2;
   --t-memory: #5FD0C0;
 
-  /* the same five, quieter, for the large filled panels */
-  --p-capone: #94B2D8;
-  --p-parkers: #DDB262;
-  --p-janell: #DD9080;
-  --p-agentcafe: #B5A6D6;
-  --p-memory: #84C2B7;
+  /* each color's complement, used for that project's commit waveform */
+  --c-capone: #F5C17D;
+  --c-parkers: #3C78F2;
+  --c-janell: #6BE0F2;
+  --c-agentcafe: #D6F29B;
+  --c-memory: #D05F6F;
 
   --display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --body: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -78,11 +78,11 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
 
-[data-track="capone"] { --track: var(--t-capone); --ptrack: var(--p-capone); }
-[data-track="parkers"] { --track: var(--t-parkers); --ptrack: var(--p-parkers); }
-[data-track="janell"] { --track: var(--t-janell); --ptrack: var(--p-janell); }
-[data-track="agentcafe"] { --track: var(--t-agentcafe); --ptrack: var(--p-agentcafe); }
-[data-track="memory"] { --track: var(--t-memory); --ptrack: var(--p-memory); }
+[data-track="capone"] { --track: var(--t-capone); --comp: var(--c-capone); }
+[data-track="parkers"] { --track: var(--t-parkers); --comp: var(--c-parkers); }
+[data-track="janell"] { --track: var(--t-janell); --comp: var(--c-janell); }
+[data-track="agentcafe"] { --track: var(--t-agentcafe); --comp: var(--c-agentcafe); }
+[data-track="memory"] { --track: var(--t-memory); --comp: var(--c-memory); }
 
 /* ---------- header ---------- */
 .top {
@@ -178,21 +178,12 @@ h2.title {
   color: var(--pfg);
   min-width: 0;
 }
-.panel.filled {
-  --pbg: var(--ptrack);
-  --pfg: var(--on);
-  --pmuted: rgba(14, 17, 22, 0.76);
-  --pline: rgba(14, 17, 22, 0.2);
-  --wave: var(--on);
-  --chip-bg: var(--on);
-  --chip-fg: var(--ptrack);
-}
 .panel.outlined {
   --pbg: color-mix(in srgb, var(--track) 7%, transparent);
   --pfg: var(--ink);
   --pmuted: var(--muted);
   --pline: color-mix(in srgb, var(--track) 34%, transparent);
-  --wave: var(--track);
+  --wave: var(--comp);
   --chip-bg: transparent;
   --chip-fg: var(--track);
   border: 1.5px solid var(--pline);
@@ -219,10 +210,9 @@ h2.title {
   font-weight: 500;
   white-space: nowrap;
 }
-.filled .status { border-color: var(--on); }
 .status::before { content: ""; width: 0.55em; height: 0.55em; border-radius: 50%; background: currentColor; }
-.outlined .status::before { background: transparent; border: 1.5px solid currentColor; }
-.filled .status.pulse::before { animation: pulse 2.4s ease-in-out infinite; }
+.status:not(.pulse)::before { background: transparent; border: 1.5px solid currentColor; }
+.status.pulse::before { animation: pulse 2.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: 0.25; } }
 
 .history { flex: 1 1 16rem; max-width: 30rem; min-width: 0; }
@@ -243,7 +233,7 @@ h2.title {
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
-.outlined h3 { color: var(--track); }
+.outlined h3, .outlined h2 { color: var(--track); }
 .tagline { margin-top: 0.6rem; font-size: var(--step-1); font-style: italic; color: var(--pmuted); }
 .panel-body {
   display: grid;
@@ -276,7 +266,6 @@ h2.title {
   text-decoration: none;
   transition: transform 0.25s var(--ease);
 }
-.filled .cta { color: var(--ptrack); }
 .cta span { display: inline-block; transition: transform 0.25s var(--ease); }
 .cta:hover { transform: translateY(-2px); }
 .cta:hover span { transform: translate(3px, -3px); }
@@ -290,7 +279,7 @@ h2.title {
   width: 0.75rem;
   height: 2px;
   border-radius: 1px;
-  background: var(--wave);
+  background: var(--track);
 }
 .num { font-family: var(--mono); font-size: 0.92em; font-variant-numeric: tabular-nums; }
 
@@ -432,7 +421,7 @@ footer { padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
 
   <section id="day-job">
     <div class="wrap">
-      <article class="panel filled reveal" data-track="capone">
+      <article class="panel outlined reveal" data-track="capone">
         <div class="panel-top">
           <span class="status pulse">day job</span>
         </div>
@@ -471,7 +460,7 @@ footer { padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
       </div>
       <div class="stack-of-panels">
 
-        <article class="panel filled reveal" id="parkers" data-track="parkers">
+        <article class="panel outlined reveal" id="parkers" data-track="parkers">
           <div class="panel-top">
             <span class="status pulse">live</span>
             <figure class="history">
@@ -510,7 +499,7 @@ footer { padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
           </div>
         </article>
 
-        <article class="panel filled reveal" id="janells-run" data-track="janell">
+        <article class="panel outlined reveal" id="janells-run" data-track="janell">
           <div class="panel-top">
             <span class="status pulse">in use</span>
             <figure class="history">

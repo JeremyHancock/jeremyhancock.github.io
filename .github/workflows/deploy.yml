@@ -17,17 +17,24 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+# Two jobs on purpose: with upload and deploy in one job, deploy-pages asked for the artifact
+# 0.4s after it was uploaded and got "No artifacts named github-pages" (twice, Nov 11, 2026).
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-24.04
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
           path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v5

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeremy Hancock</title>
+<meta name="description" content="Full-stack developer in Richmond, Virginia. I build small, complete things for real people: websites, apps and APIs, with the security, tests and failure handling most side projects skip.">
+<meta property="og:title" content="Jeremy Hancock, full-stack developer">
+<meta property="og:description" content="I build small, complete things for real people. Websites, apps and APIs, with the parts most side projects skip.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314211C'/%3E%3Ctext x='32' y='43' font-family='Arial,Helvetica,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23F5C542'%3EJH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned column, 68rem wide. Each project is a row: a narrow rail of
+   status + stack on the left, the story on the right. Status is the recurring device. */
+:root {
+  --paper: #F2F4EE;
+  --surface: #FFFFFF;
+  --ink: #14211C;
+  --muted: #55635C;
+  --line: #D3D9CF;
+  --accent: #0B6B4F;
+  --hl: #F5C542;
+  --live: #1F9D61;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.75rem;
+  --step-3: clamp(2rem, 4.2vw, 2.75rem);
+  --step-4: clamp(2.75rem, 8.4vw, 6rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0E1714;
+    --surface: #15211D;
+    --ink: #E9EEE8;
+    --muted: #9BA9A1;
+    --line: #27362F;
+    --accent: #6FD3A8;
+    --hl: #6B5200;
+    --live: #4CC78A;
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- header ---------- */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-block: 1.5rem;
+}
+.name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--step-1);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.top nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+.top nav a {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+  text-decoration: none;
+}
+.top nav a:hover { color: var(--ink); text-decoration: underline; }
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
+  gap: 2.5rem 4rem;
+  align-items: end;
+  padding-block: clamp(2rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem);
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--step-4);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.hl {
+  background: linear-gradient(transparent 56%, var(--hl) 56%, var(--hl) 90%, transparent 90%);
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
+}
+.lede {
+  max-width: 34em;
+  margin-top: 2rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.lede strong { color: var(--ink); font-weight: 600; }
+
+.board {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 0.5rem;
+}
+.board h2 {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.board li { padding-block: 0.75rem; border-top: 1px solid var(--line); }
+.board li:first-child { border-top: 0; }
+.board a, .board .what {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.3;
+  margin-top: 0.2rem;
+}
+.board a:hover { text-decoration: underline; }
+
+/* ---------- status chip ---------- */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.status::before {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--live);
+  flex: none;
+}
+.status.shelved::before, .status.bench::before {
+  background: transparent;
+  border: 1.5px solid var(--muted);
+}
+.status.bench::before { border-style: dashed; }
+
+/* ---------- sections ---------- */
+section { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--line); }
+.section-head { max-width: 40em; margin-bottom: clamp(1.5rem, 4vw, 3rem); }
+h2.title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-3);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.section-head p { margin-top: 1rem; color: var(--muted); }
+
+/* ---------- project rows ---------- */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  gap: 1.25rem 4rem;
+  padding-block: 2.25rem;
+  border-top: 1px solid var(--line);
+}
+.project:first-of-type { border-top: 0; padding-top: 0; }
+.project:last-of-type { padding-bottom: 0; }
+.rail { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.stack {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  line-height: 1.75;
+  color: var(--muted);
+}
+.story { min-width: 0; max-width: 40em; }
+.story h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.story h3 a { color: var(--ink); text-decoration: none; }
+.story h3 a::after { content: " \2197"; color: var(--accent); font-weight: 500; }
+.story h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.tagline { margin-top: 0.4rem; font-style: italic; color: var(--muted); }
+.story > p:not(.tagline) { margin-top: 1rem; }
+.receipts { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
+.receipts li { position: relative; padding-left: 1.4rem; }
+.receipts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.7rem;
+  height: 2px;
+  background: var(--accent);
+}
+.num { font-family: var(--mono); font-size: 0.92em; font-variant-numeric: tabular-nums; }
+
+/* ---------- day job ---------- */
+.job {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+  gap: 2rem 4rem;
+  align-items: start;
+}
+.job .prose { max-width: 36em; display: grid; gap: 1rem; }
+.roles { margin: 0; padding: 0; list-style: none; }
+.roles li {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--line);
+  line-height: 1.4;
+}
+.roles li:first-child { border-top: 0; padding-top: 0.3rem; }
+.years {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- principles ---------- */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.25rem 4rem;
+}
+.principles h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+}
+.principles p { color: var(--muted); max-width: 30em; }
+
+/* ---------- about ---------- */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
+  gap: 2.5rem 4rem;
+}
+.about .prose { max-width: 36em; display: grid; gap: 1rem; }
+.about h3 {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.tools li {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  padding-block: 0.45rem;
+  border-top: 1px solid var(--line);
+}
+.tools li:first-child { border-top: 0; padding-top: 0; }
+
+/* ---------- footer ---------- */
+footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4rem) 3rem; }
+.signoff {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--step-3);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 16em;
+  text-wrap: balance;
+}
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 1.5rem; font-weight: 600; }
+.fine { margin-top: 3rem; font-family: var(--mono); font-size: var(--step--1); color: var(--muted); }
+
+@media (max-width: 760px) {
+  .hero, .about, .job, .project, .principles { grid-template-columns: minmax(0, 1fr); }
+  .hero { align-items: start; }
+  .project { gap: 1rem; }
+  .rail { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: baseline; }
+  .stack { line-height: 1.6; }
+  .stack br { display: none; }
+  .stack span::after { content: " · "; }
+  .stack span:last-child::after { content: ""; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="name" href="#top">Jeremy Hancock</a>
+  <nav aria-label="Sections">
+    <a href="#day-job">day job</a>
+    <a href="#work">projects</a>
+    <a href="#shelved">shelved</a>
+    <a href="#how">how I work</a>
+    <a href="#about">about</a>
+    <a href="https://github.com/JeremyHancock">github</a>
+    <a href="https://www.linkedin.com/in/jeremy-hancock/">linkedin</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Full-stack developer · Principal Associate at Capital One · Richmond, Virginia</p>
+      <h1>I build small, <span class="hl">complete</span> things for real people.</h1>
+      <p class="lede">Websites, apps and APIs that someone actually uses. I care about the parts
+      most side projects skip: <strong>security, privacy, tests,</strong> and what happens when
+      something breaks.</p>
+    </div>
+
+    <aside class="board" aria-labelledby="board-title">
+      <h2 id="board-title">Right now</h2>
+      <ul>
+        <li>
+          <span class="status">day job</span>
+          <a href="#day-job">Capital One, server-driven UI platform</a>
+        </li>
+        <li>
+          <span class="status">live</span>
+          <a href="#parkers">Parker's Diamond Detailing</a>
+        </li>
+        <li>
+          <span class="status">in use</span>
+          <a href="#janells-run">Janell's Run</a>
+        </li>
+        <li>
+          <span class="status bench">on the bench</span>
+          <span class="what">A website template where each person shapes their own interface with an agent</span>
+        </li>
+      </ul>
+    </aside>
+  </div>
+
+  <section id="day-job">
+    <div class="wrap job">
+      <div class="prose">
+        <h2 class="title">Capital One, since 2019</h2>
+        <p>I work on Capital One's internal server-driven UI platform, where the server
+        describes a screen and the client renders it. These days I'm on the front end, after
+        plenty of backend work along the way.</p>
+        <p>I came in as a contractor, was hired on two years later, and have been promoted
+        since.</p>
+      </div>
+      <ol class="roles">
+        <li>
+          <span class="years">2024 – now</span>
+          <span><strong>Principal Associate</strong>, Engineer 3</span>
+        </li>
+        <li>
+          <span class="years">2021 – 2024</span>
+          <span><strong>Senior Associate</strong>, Engineer 2</span>
+        </li>
+        <li>
+          <span class="years">2019 – 2021</span>
+          <span><strong>Contractor</strong>, through Strategic Staffing Solutions</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="title">Side projects that people depend on</h2>
+      </div>
+
+      <article class="project" id="parkers">
+        <div class="rail">
+          <span class="status">live</span>
+          <p class="stack">
+            <span>HTML, CSS, JS</span><br>
+            <span>Python on Lambda</span><br>
+            <span>API Gateway</span><br>
+            <span>CloudFront + S3</span><br>
+            <span>DynamoDB</span><br>
+            <span>SES, Cognito</span><br>
+            <span>GitHub Actions</span>
+          </p>
+        </div>
+        <div class="story">
+          <h3><a href="https://parkersdiamonddetailing.com">Parker's Diamond Detailing</a></h3>
+          <p class="tagline">The website and back office for a mobile auto-detailing business.</p>
+          <p>My son runs a detailing business around Richmond. I built the site that brings in
+          his customers and the system behind it, and I keep it running.</p>
+          <ul class="receipts">
+            <li><strong>No framework and no build step.</strong> The front end is plain HTML, CSS
+            and JavaScript, so there is very little to break and nothing to upgrade on a
+            schedule.</li>
+            <li><strong>One server, everywhere.</strong> The same Lambda handler runs in
+            production and on my laptop, with AWS swapped for local stand-ins, so what I test
+            is what ships.</li>
+            <li><strong>Deploys by branch.</strong> A push to QA goes to QA and a push to main
+            goes to production, after the Jest and pytest suites pass.</li>
+            <li><strong>A phone-first customer book</strong> for jobs and before/after photos,
+            with an outbox that holds changes when the signal drops. It is in testing with the
+            one person it was built for.</li>
+            <li><span class="num">758</span> commits, and no secret in any of them.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="project" id="janells-run">
+        <div class="rail">
+          <span class="status">in use</span>
+          <p class="stack">
+            <span>Swift, SwiftUI</span><br>
+            <span>SwiftData</span><br>
+            <span>CloudKit sync</span><br>
+            <span>HealthKit, read-only</span><br>
+            <span>Sign in with Apple</span><br>
+            <span>Cloudflare Worker</span>
+          </p>
+        </div>
+        <div class="story">
+          <h3><a href="https://github.com/JeremyHancock/JanellsRunApp">Janell's Run</a></h3>
+          <p class="tagline">An iOS app for tracking races, with exactly one target user.</p>
+          <p>My wife runs races and wanted her results, PRs and history in one place. She uses
+          it, files feedback from inside the app, and I ship the fixes.</p>
+          <ul class="receipts">
+            <li><strong>Zero third-party dependencies.</strong> About
+            <span class="num">3,600</span> lines of Swift, with unit tests that run on every
+            pull request.</li>
+            <li><strong>Her data stays hers.</strong> It syncs through her own private iCloud
+            database, and the app only ever reads from Health.</li>
+            <li><strong>Imports years of race history</strong> from CSV files and Athlinks.</li>
+            <li><strong>Feedback becomes a GitHub issue</strong> through a small Cloudflare
+            Worker. It is rate-limited, and it strips names before anything reaches the public
+            repo.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="shelved">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="title">Shelved, and proud of them</h2>
+        <p>Two projects about AI agents acting for people while the person stays in control.
+        I built both in 2026 and shut them down that June. The engineering held up. I never
+        found real demand, and a trust-and-security product run by one person can't honestly
+        make the promises it needs to make. Both repos are still public.</p>
+      </div>
+
+      <article class="project" id="agentcafe">
+        <div class="rail">
+          <span class="status shelved">shelved Jun 2026</span>
+          <p class="stack">
+            <span>Python 3.12, FastAPI</span><br>
+            <span>SQLite</span><br>
+            <span>MCP</span><br>
+            <span>RS256 JWTs</span><br>
+            <span>WebAuthn passkeys</span><br>
+            <span>Docker on Fly.io</span>
+          </p>
+        </div>
+        <div class="story">
+          <h3><a href="https://github.com/JeremyHancock/AgentCafe">AgentCafe</a></h3>
+          <p class="tagline">The cafe for agents.</p>
+          <p>AI agents browse a Menu of real-world services, show a Passport proving a human
+          authorized them, and place orders. The Cafe sits in the middle and handles
+          authorization, consent and audit, so an agent never sees a backend URL or a
+          credential.</p>
+          <ul class="receipts">
+            <li><strong>Two tiers of permission.</strong> An agent can ask for read access by
+            itself. Anything that writes needs a human to approve it with a passkey.</li>
+            <li><strong>Checked twice on every order:</strong> the human's Passport and the
+            company's own policy, with budget, duration and scope limits.</li>
+            <li><strong>A tamper-evident audit log,</strong> hash-chained with SHA-256.</li>
+            <li><strong>An onboarding wizard</strong> that turns a company's OpenAPI spec into
+            a published service.</li>
+            <li><span class="num">405</span> tests and a pylint score of
+            <span class="num">10.00</span>.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="project" id="human-memory">
+        <div class="rail">
+          <span class="status shelved">shelved Jun 2026</span>
+          <p class="stack">
+            <span>Python 3.12, FastAPI</span><br>
+            <span>SQLite, WAL + FTS5</span><br>
+            <span>MCP</span><br>
+            <span>RS256 JWTs</span><br>
+            <span>Jinja2 dashboard</span><br>
+            <span>Docker + Caddy</span>
+          </p>
+        </div>
+        <div class="story">
+          <h3><a href="https://github.com/JeremyHancock/human-memory">Human Memory</a></h3>
+          <p class="tagline">Memory for AI, owned by humans.</p>
+          <p>An API that gives AI agents persistent, structured memory across sessions. The
+          human it belongs to can see everything, decide which agent gets which access, and
+          delete any of it.</p>
+          <ul class="receipts">
+            <li><strong>Agents can store and search. Only the human can delete.</strong></li>
+            <li><strong>Scoped access tokens,</strong> shown once and never stored in
+            plaintext.</li>
+            <li><strong>Every query is isolated by namespace</strong> at the storage layer, and
+            the audit log never contains the stored values.</li>
+            <li><strong>Full-text search</strong> on SQLite FTS5, and passwordless sign-in by
+            magic link.</li>
+            <li><span class="num">474</span> tests.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="title">How I work</h2>
+      </div>
+      <div class="principles">
+        <div>
+          <h3>Finish the unglamorous parts</h3>
+          <p>Tests, CI, rate limits, audit logs, a privacy policy that matches what the code
+          does. A project isn't done when the demo works.</p>
+        </div>
+        <div>
+          <h3>Keep it small enough to hold in your head</h3>
+          <p>No framework where plain HTML will do. No dependency I can't justify. When
+          something breaks, I want to already know where to look.</p>
+        </div>
+        <div>
+          <h3>Build for one real person first</h3>
+          <p>A business owner on his phone in a driveway. A runner checking her PRs. I'd
+          rather get one person's actual complaints than guess at what a thousand might
+          want.</p>
+        </div>
+        <div>
+          <h3>Know when to stop</h3>
+          <p>I shelved two projects I liked because the demand wasn't there. Then I took
+          production down, revoked the keys and backed up the data, instead of leaving it to
+          rot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="prose">
+        <h2 class="title">About</h2>
+        <p>I've been writing software since a coding bootcamp in 2018, and doing it for a
+        living at Capital One since 2019. I think in systems,
+        and I like owning the whole thing: the front end, the API, the infrastructure, the
+        deploy pipeline and the pager.</p>
+        <p>Lately most of my curiosity goes to AI agents, and to the question of how a person
+        stays in charge of software that acts for them.</p>
+        <p>Away from the keyboard I record music in Logic Pro: live audio, live MIDI, and
+        more stacked tracks than any song needs.</p>
+      </div>
+      <div>
+        <h3>What I reach for</h3>
+        <ul class="tools">
+          <li>Python, FastAPI</li>
+          <li>JavaScript, Node</li>
+          <li>Swift, SwiftUI</li>
+          <li>AWS: Lambda, CloudFront, S3, DynamoDB, SES, Cognito</li>
+          <li>Cloudflare Workers</li>
+          <li>SQLite</li>
+          <li>Docker</li>
+          <li>GitHub Actions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="signoff">Say hello.</p>
+    <p class="links">
+      <a href="https://github.com/JeremyHancock">GitHub</a>
+      <a href="https://www.linkedin.com/in/jeremy-hancock/">LinkedIn</a>
+      <!-- EMAIL: left off until Jeremy decides whether he wants an address public. -->
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

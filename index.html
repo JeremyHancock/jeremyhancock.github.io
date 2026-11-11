@@ -4,26 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jeremy Hancock</title>
-<meta name="description" content="Full-stack developer in Richmond, Virginia. I build small, complete things for real people: websites, apps and APIs, with the security, tests and failure handling most side projects skip.">
-<meta property="og:title" content="Jeremy Hancock, full-stack developer">
-<meta property="og:description" content="I build small, complete things for real people. Websites, apps and APIs, with the parts most side projects skip.">
+<meta name="description" content="Software engineer in Richmond, Virginia. Principal Associate at Capital One, and a builder of small, complete things for real people.">
+<meta property="og:title" content="Jeremy Hancock, software engineer">
+<meta property="og:description" content="I build small, complete things for real people. Principal Associate at Capital One, with side projects that people depend on.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314211C'/%3E%3Ctext x='32' y='43' font-family='Arial,Helvetica,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23F5C542'%3EJH%3C/text%3E%3C/svg%3E">
+<meta property="og:url" content="https://jeremyhancock.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C1413'/%3E%3Cg fill='%23EDB949'%3E%3Crect x='13' y='26' width='5' height='12' rx='2.5'/%3E%3Crect x='22' y='16' width='5' height='32' rx='2.5'/%3E%3Crect x='31' y='22' width='5' height='20' rx='2.5'/%3E%3Crect x='40' y='11' width='5' height='42' rx='2.5'/%3E%3Crect x='49' y='27' width='5' height='10' rx='2.5'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one left-aligned column, 68rem wide. Each project is a row: a narrow rail of
-   status + stack on the left, the story on the right. Status is the recurring device. */
+/* Layout: one left-aligned column, 70rem wide. The page is arranged like a recording session:
+   every project is a track with its own color, and the hero draws each track's real commit
+   history as a waveform. That color follows the project down the page. */
 :root {
-  --paper: #F2F4EE;
+  --paper: #F3F4EF;
   --surface: #FFFFFF;
-  --ink: #14211C;
-  --muted: #55635C;
-  --line: #D3D9CF;
-  --accent: #0B6B4F;
+  --ink: #131C1A;
+  --muted: #56625E;
+  --line: #D5DAD2;
   --hl: #F5C542;
-  --live: #1F9D61;
+
+  --t-capone: #2F6BB5;
+  --t-parkers: #B07A0A;
+  --t-janell: #CC4B3A;
+  --t-agentcafe: #7A4FC0;
+  --t-memory: #1E7F76;
 
   --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -32,20 +38,24 @@
   --step--1: 0.8125rem;
   --step-0: 1.0625rem;
   --step-1: 1.25rem;
-  --step-2: 1.75rem;
+  --step-2: clamp(1.75rem, 3vw, 2.25rem);
   --step-3: clamp(2rem, 4.2vw, 2.75rem);
-  --step-4: clamp(2.75rem, 8.4vw, 6rem);
+  --step-4: clamp(3rem, 9.6vw, 7.25rem);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #0E1714;
-    --surface: #15211D;
-    --ink: #E9EEE8;
-    --muted: #9BA9A1;
-    --line: #27362F;
-    --accent: #6FD3A8;
-    --hl: #6B5200;
-    --live: #4CC78A;
+    --paper: #0C1413;
+    --surface: #131D1B;
+    --ink: #ECEFE9;
+    --muted: #97A49F;
+    --line: #233230;
+    --hl: #7A5B00;
+
+    --t-capone: #6FA8E8;
+    --t-parkers: #EDB949;
+    --t-janell: #F0816E;
+    --t-agentcafe: #B693E8;
+    --t-memory: #5CC9BC;
     color-scheme: dark;
   }
 }
@@ -59,19 +69,28 @@ body {
   font-family: var(--body);
   font-size: var(--step-0);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
-h1, h2, h3, p, ul { margin: 0; }
-ul { padding: 0; list-style: none; }
-a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: var(--ink); text-decoration-color: var(--muted); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--hl); color: var(--ink); }
 
 .wrap {
-  max-width: 68rem;
+  max-width: 70rem;
   margin-inline: auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
+
+/* track colors: set once per element, used by everything inside it */
+[data-track="capone"] { --track: var(--t-capone); }
+[data-track="parkers"] { --track: var(--t-parkers); }
+[data-track="janell"] { --track: var(--t-janell); }
+[data-track="agentcafe"] { --track: var(--t-agentcafe); }
+[data-track="memory"] { --track: var(--t-memory); }
 
 /* ---------- header ---------- */
 .top {
@@ -87,7 +106,6 @@ a:hover { text-decoration-thickness: 2px; }
   font-weight: 800;
   font-size: var(--step-1);
   letter-spacing: -0.01em;
-  color: var(--ink);
   text-decoration: none;
 }
 .top nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
@@ -100,13 +118,7 @@ a:hover { text-decoration-thickness: 2px; }
 .top nav a:hover { color: var(--ink); text-decoration: underline; }
 
 /* ---------- hero ---------- */
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
-  gap: 2.5rem 4rem;
-  align-items: end;
-  padding-block: clamp(2rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem);
-}
+.hero { padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2.5rem, 6vw, 4rem); }
 .eyebrow {
   font-family: var(--mono);
   font-size: var(--step--1);
@@ -118,8 +130,9 @@ h1 {
   font-family: var(--display);
   font-weight: 800;
   font-size: var(--step-4);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  max-width: 11em;
   text-wrap: balance;
 }
 .hl {
@@ -128,40 +141,63 @@ h1 {
   margin-inline: -0.06em;
 }
 .lede {
-  max-width: 34em;
-  margin-top: 2rem;
+  max-width: 36em;
+  margin-top: 2.25rem;
   font-size: var(--step-1);
   line-height: 1.5;
   color: var(--muted);
 }
 .lede strong { color: var(--ink); font-weight: 600; }
 
-.board {
+/* ---------- the session: one waveform track per project ---------- */
+.session { padding-bottom: clamp(3rem, 7vw, 5.5rem); }
+.session-frame {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 1.25rem 1.25rem 0.5rem;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem 1.1rem;
 }
-.board h2 {
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: var(--step--1);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
+.lane {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: 0 1.5rem;
+  align-items: center;
 }
-.board li { padding-block: 0.75rem; border-top: 1px solid var(--line); }
-.board li:first-child { border-top: 0; }
-.board a, .board .what {
-  display: block;
+.lane + .lane { border-top: 1px solid var(--line); }
+.lane canvas { display: block; width: 100%; height: 58px; }
+.lane.axis canvas { height: 26px; }
+.lane.axis + .lane { border-top: 0; }
+.lane-label { min-width: 0; padding-block: 0.4rem; line-height: 1.25; }
+.lane-label a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55em;
   font-weight: 600;
-  color: var(--ink);
   text-decoration: none;
-  line-height: 1.3;
-  margin-top: 0.2rem;
 }
-.board a:hover { text-decoration: underline; }
+.lane-label a::before {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--track);
+  flex: none;
+}
+.lane-label a:hover { text-decoration: underline; }
+.lane-label small {
+  display: block;
+  margin-top: 0.15rem;
+  padding-left: 1.15em;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.session figcaption {
+  margin-top: 0.9rem;
+  max-width: 62em;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
 
 /* ---------- status chip ---------- */
 .status {
@@ -178,18 +214,14 @@ h1 {
   width: 0.6em;
   height: 0.6em;
   border-radius: 50%;
-  background: var(--live);
+  background: var(--track, var(--muted));
   flex: none;
 }
-.status.shelved::before, .status.bench::before {
-  background: transparent;
-  border: 1.5px solid var(--muted);
-}
-.status.bench::before { border-style: dashed; }
+.status.shelved::before { background: transparent; border: 1.5px solid var(--track, var(--muted)); }
 
 /* ---------- sections ---------- */
-section { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--line); }
-.section-head { max-width: 40em; margin-bottom: clamp(1.5rem, 4vw, 3rem); }
+section { padding-block: clamp(2.75rem, 6.5vw, 5rem); border-top: 1px solid var(--line); }
+.section-head { max-width: 40em; margin-bottom: clamp(1.75rem, 4vw, 3rem); }
 h2.title {
   font-family: var(--display);
   font-weight: 700;
@@ -200,49 +232,6 @@ h2.title {
 }
 .section-head p { margin-top: 1rem; color: var(--muted); }
 
-/* ---------- project rows ---------- */
-.project {
-  display: grid;
-  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
-  gap: 1.25rem 4rem;
-  padding-block: 2.25rem;
-  border-top: 1px solid var(--line);
-}
-.project:first-of-type { border-top: 0; padding-top: 0; }
-.project:last-of-type { padding-bottom: 0; }
-.rail { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
-.stack {
-  font-family: var(--mono);
-  font-size: var(--step--1);
-  line-height: 1.75;
-  color: var(--muted);
-}
-.story { min-width: 0; max-width: 40em; }
-.story h3 {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: var(--step-2);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-.story h3 a { color: var(--ink); text-decoration: none; }
-.story h3 a::after { content: " \2197"; color: var(--accent); font-weight: 500; }
-.story h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
-.tagline { margin-top: 0.4rem; font-style: italic; color: var(--muted); }
-.story > p:not(.tagline) { margin-top: 1rem; }
-.receipts { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
-.receipts li { position: relative; padding-left: 1.4rem; }
-.receipts li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.72em;
-  width: 0.7rem;
-  height: 2px;
-  background: var(--accent);
-}
-.num { font-family: var(--mono); font-size: 0.92em; font-variant-numeric: tabular-nums; }
-
 /* ---------- day job ---------- */
 .job {
   display: grid;
@@ -251,7 +240,6 @@ h2.title {
   align-items: start;
 }
 .job .prose { max-width: 36em; display: grid; gap: 1rem; }
-.roles { margin: 0; padding: 0; list-style: none; }
 .roles li {
   display: grid;
   grid-template-columns: 7.5rem minmax(0, 1fr);
@@ -265,10 +253,55 @@ h2.title {
 .years {
   font-family: var(--mono);
   font-size: var(--step--1);
-  color: var(--muted);
+  color: var(--track, var(--muted));
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+/* ---------- project rows ---------- */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+  gap: 1.25rem 4rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--line);
+}
+.project:first-of-type { border-top: 0; padding-top: 0; }
+.project:last-of-type { padding-bottom: 0; }
+.rail { display: flex; flex-direction: column; gap: 0.9rem; align-items: flex-start; }
+.rail canvas { display: block; width: 100%; height: 40px; }
+.stack {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  line-height: 1.75;
+  color: var(--muted);
+}
+.story { min-width: 0; max-width: 40em; }
+.story h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+.story h3 a { text-decoration: none; }
+.story h3 a::after { content: " \2197"; color: var(--track); font-weight: 500; }
+.story h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.tagline { margin-top: 0.45rem; font-style: italic; color: var(--muted); }
+.story > p:not(.tagline) { margin-top: 1rem; }
+.receipts { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
+.receipts li { position: relative; padding-left: 1.4rem; }
+.receipts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.7rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--track);
+}
+.num { font-family: var(--mono); font-size: 0.92em; font-variant-numeric: tabular-nums; }
 
 /* ---------- principles ---------- */
 .principles {
@@ -310,28 +343,30 @@ h2.title {
 .tools li:first-child { border-top: 0; padding-top: 0; }
 
 /* ---------- footer ---------- */
-footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4rem) 3rem; }
+footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
 .signoff {
   font-family: var(--display);
   font-weight: 800;
-  font-size: var(--step-3);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  max-width: 16em;
-  text-wrap: balance;
+  font-size: var(--step-4);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
 }
-.links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 1.5rem; font-weight: 600; }
-.fine { margin-top: 3rem; font-family: var(--mono); font-size: var(--step--1); color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 1.75rem; font-size: var(--step-1); font-weight: 600; }
 
 @media (max-width: 760px) {
-  .hero, .about, .job, .project, .principles { grid-template-columns: minmax(0, 1fr); }
-  .hero { align-items: start; }
+  .about, .job, .project, .principles { grid-template-columns: minmax(0, 1fr); }
   .project { gap: 1rem; }
-  .rail { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: baseline; }
+  .rail { gap: 0.6rem; }
   .stack { line-height: 1.6; }
   .stack br { display: none; }
   .stack span::after { content: " · "; }
   .stack span:last-child::after { content: ""; }
+  .session-frame { padding: 0.9rem 1rem; }
+  .lane { grid-template-columns: minmax(0, 1fr); }
+  .lane-label { padding-block: 0.7rem 0; }
+  .lane-label small { display: inline; padding-left: 0.6em; }
+  .lane canvas { height: 46px; }
+  .lane.axis .lane-label { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -354,38 +389,49 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
 <main id="top">
 
   <div class="wrap hero">
-    <div>
-      <p class="eyebrow">Full-stack developer · Principal Associate at Capital One · Richmond, Virginia</p>
-      <h1>I build small, <span class="hl">complete</span> things for real people.</h1>
-      <p class="lede">Websites, apps and APIs that someone actually uses. I care about the parts
-      most side projects skip: <strong>security, privacy, tests,</strong> and what happens when
-      something breaks.</p>
-    </div>
-
-    <aside class="board" aria-labelledby="board-title">
-      <h2 id="board-title">Right now</h2>
-      <ul>
-        <li>
-          <span class="status">day job</span>
-          <a href="#day-job">Capital One, server-driven UI platform</a>
-        </li>
-        <li>
-          <span class="status">live</span>
-          <a href="#parkers">Parker's Diamond Detailing</a>
-        </li>
-        <li>
-          <span class="status">in use</span>
-          <a href="#janells-run">Janell's Run</a>
-        </li>
-        <li>
-          <span class="status bench">on the bench</span>
-          <span class="what">A website template where each person shapes their own interface with an agent</span>
-        </li>
-      </ul>
-    </aside>
+    <p class="eyebrow">Software engineer · Principal Associate at Capital One · Richmond, Virginia</p>
+    <h1>I build small, <span class="hl">complete</span> things for real people.</h1>
+    <p class="lede">Websites, apps and APIs that someone actually uses. I care about the parts
+    most side projects skip: <strong>security, privacy, tests,</strong> and what happens when
+    something breaks.</p>
   </div>
 
-  <section id="day-job">
+  <div class="wrap session">
+    <figure>
+      <div class="session-frame" id="session" role="img"
+           aria-label="Timeline from 2019 to today. Capital One runs the whole way: contractor from 2019, Senior Associate from 2021, Principal Associate from 2024. Parker's Diamond Detailing has commits from March 2023 to now, heaviest in 2026. AgentCafe and Human Memory were built between February and April 2026. Janell's Run began in May 2026.">
+        <div class="lane axis">
+          <div class="lane-label"></div>
+          <canvas data-lane="axis"></canvas>
+        </div>
+        <div class="lane" data-track="capone">
+          <div class="lane-label"><a href="#day-job">Capital One</a><small>day job · since 2019</small></div>
+          <canvas data-lane="capone"></canvas>
+        </div>
+        <div class="lane" data-track="parkers">
+          <div class="lane-label"><a href="#parkers">Parker's Diamond Detailing</a><small>live · since 2023</small></div>
+          <canvas data-lane="parkers"></canvas>
+        </div>
+        <div class="lane" data-track="janell">
+          <div class="lane-label"><a href="#janells-run">Janell's Run</a><small>in use · since 2026</small></div>
+          <canvas data-lane="janell"></canvas>
+        </div>
+        <div class="lane" data-track="agentcafe">
+          <div class="lane-label"><a href="#agentcafe">AgentCafe</a><small>shelved Jun 2026</small></div>
+          <canvas data-lane="agentcafe"></canvas>
+        </div>
+        <div class="lane" data-track="memory">
+          <div class="lane-label"><a href="#human-memory">Human Memory</a><small>shelved Jun 2026</small></div>
+          <canvas data-lane="memory"></canvas>
+        </div>
+      </div>
+      <figcaption>Drawn from the commit logs: each bar is one stretch of commits to that
+      project, taller for more. Capital One's commits aren't mine to show, so that track marks
+      my roles by year.</figcaption>
+    </figure>
+  </div>
+
+  <section id="day-job" data-track="capone">
     <div class="wrap job">
       <div class="prose">
         <h2 class="title">Capital One, since 2019</h2>
@@ -418,9 +464,10 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
         <h2 class="title">Side projects that people depend on</h2>
       </div>
 
-      <article class="project" id="parkers">
+      <article class="project" id="parkers" data-track="parkers">
         <div class="rail">
           <span class="status">live</span>
+          <canvas data-mini="parkers" aria-hidden="true"></canvas>
           <p class="stack">
             <span>HTML, CSS, JS</span><br>
             <span>Python on Lambda</span><br>
@@ -448,14 +495,16 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
             <li><strong>A phone-first customer book</strong> for jobs and before/after photos,
             with an outbox that holds changes when the signal drops. It is in testing with the
             one person it was built for.</li>
-            <li><span class="num">758</span> commits, and no secret in any of them.</li>
+            <li>More than <span class="num">750</span> commits since March 2023, and no secret
+            in any of them.</li>
           </ul>
         </div>
       </article>
 
-      <article class="project" id="janells-run">
+      <article class="project" id="janells-run" data-track="janell">
         <div class="rail">
           <span class="status">in use</span>
+          <canvas data-mini="janell" aria-hidden="true"></canvas>
           <p class="stack">
             <span>Swift, SwiftUI</span><br>
             <span>SwiftData</span><br>
@@ -496,9 +545,10 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
         make the promises it needs to make. Both repos are still public.</p>
       </div>
 
-      <article class="project" id="agentcafe">
+      <article class="project" id="agentcafe" data-track="agentcafe">
         <div class="rail">
           <span class="status shelved">shelved Jun 2026</span>
+          <canvas data-mini="agentcafe" aria-hidden="true"></canvas>
           <p class="stack">
             <span>Python 3.12, FastAPI</span><br>
             <span>SQLite</span><br>
@@ -529,9 +579,10 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
         </div>
       </article>
 
-      <article class="project" id="human-memory">
+      <article class="project" id="human-memory" data-track="memory">
         <div class="rail">
           <span class="status shelved">shelved Jun 2026</span>
+          <canvas data-mini="memory" aria-hidden="true"></canvas>
           <p class="stack">
             <span>Python 3.12, FastAPI</span><br>
             <span>SQLite, WAL + FTS5</span><br>
@@ -599,13 +650,15 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
       <div class="prose">
         <h2 class="title">About</h2>
         <p>I've been writing software since a coding bootcamp in 2018, and doing it for a
-        living at Capital One since 2019. I think in systems,
-        and I like owning the whole thing: the front end, the API, the infrastructure, the
-        deploy pipeline and the pager.</p>
+        living at Capital One since 2019. I think in systems, and I like owning the whole
+        thing: the front end, the API, the infrastructure, the deploy pipeline and the
+        pager.</p>
         <p>Lately most of my curiosity goes to AI agents, and to the question of how a person
-        stays in charge of software that acts for them.</p>
+        stays in charge of software that acts for them. On the bench right now is a website
+        template where each person shapes their own interface with an agent.</p>
         <p>Away from the keyboard I record music in Logic Pro: live audio, live MIDI, and
-        more stacked tracks than any song needs.</p>
+        more stacked tracks than any song needs. That is where the picture at the top of
+        this page comes from.</p>
       </div>
       <div>
         <h3>What I reach for</h3>
@@ -631,10 +684,199 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem, 6vw, 4r
     <p class="links">
       <a href="https://github.com/JeremyHancock">GitHub</a>
       <a href="https://www.linkedin.com/in/jeremy-hancock/">LinkedIn</a>
-      <!-- EMAIL: left off until Jeremy decides whether he wants an address public. -->
+      <!-- EMAIL: left off until there is a custom domain to hang a forwarding alias on. -->
     </p>
   </div>
 </footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Weekly commit counts per project: [weeks since 2019-01-01, commits]. From `git log`, Nov 11, 2026.
+  var DATA = {
+    parkers: [[218,8],[219,4],[220,12],[221,13],[222,4],[226,2],[228,2],[229,2],[230,2],[231,2],[237,4],[241,4],[243,2],[245,2],[246,2],[247,8],[249,2],[251,6],[252,5],[253,8],[254,11],[255,2],[256,5],[258,8],[260,39],[262,3],[264,6],[266,5],[272,3],[274,2],[277,5],[281,2],[284,9],[290,4],[295,3],[305,4],[307,4],[308,8],[311,1],[317,5],[328,6],[329,13],[332,6],[333,3],[360,17],[363,16],[364,19],[365,2],[366,13],[367,4],[368,11],[371,10],[373,22],[374,5],[375,5],[377,9],[378,51],[379,11],[380,33],[381,14],[382,12],[383,10],[384,8],[385,15],[386,1],[388,7],[389,19],[394,1],[395,8],[396,14],[398,10],[402,26],[403,13],[404,12],[405,97],[406,2],[407,13],[408,7],[409,18]],
+    janell: [[385,23],[386,3],[387,2],[398,8],[400,5],[407,2]],
+    agentcafe: [[372,5],[373,28],[374,14],[375,4],[377,31],[378,4],[379,31]],
+    memory: [[374,2],[375,5],[377,40],[378,30],[379,13]]
+  };
+  var WEEKS = 411;                 // 2019-01-01 to Nov 11, 2026
+  var MAX = 97;                    // busiest week across all projects
+  var YEAR_WEEK = function (y) { return (Date.UTC(y, 0, 1) - Date.UTC(2019, 0, 1)) / 6048e5; };
+  var ROLES = [
+    { from: 2019, to: 2021, label: "Contractor", level: 0.34, alpha: 0.38 },
+    { from: 2021, to: 2024, label: "Senior Associate", level: 0.52, alpha: 0.62 },
+    { from: 2024, to: null, label: "Principal Associate", level: 0.72, alpha: 0.9 }
+  ];
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var progress = reduced ? 1 : 0;
+
+  function css(el, name) { return getComputedStyle(el).getPropertyValue(name).trim(); }
+
+  function setup(canvas) {
+    var dpr = window.devicePixelRatio || 1;
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+    }
+    var ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    return { ctx: ctx, w: w, h: h };
+  }
+
+  function pill(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  // Group weeks into bars at least 4px apart, so the waveform stays legible at any width.
+  function bars(points, fromWeek, toWeek, width) {
+    var span = toWeek - fromWeek;
+    var per = Math.max(1, Math.ceil(4 / (width / span)));
+    var n = Math.ceil(span / per), out = new Array(n).fill(0);
+    points.forEach(function (p) {
+      var i = Math.floor((p[0] - fromWeek) / per);
+      if (i >= 0 && i < n) out[i] = Math.max(out[i], p[1]);
+    });
+    return { values: out, pitch: width / n };
+  }
+
+  function drawWave(ctx, b, x0, mid, maxH, color, lit) {
+    var bw = Math.max(1.5, Math.min(b.pitch - 1.5, 5));
+    ctx.fillStyle = color;
+    b.values.forEach(function (v, i) {
+      if (!v) return;
+      var x = x0 + i * b.pitch + (b.pitch - bw) / 2;
+      var hh = Math.max(3, Math.sqrt(v / MAX) * maxH);
+      ctx.globalAlpha = (x0 + (i + 0.5) * b.pitch) <= lit ? 1 : 0.28;
+      pill(ctx, x, mid - hh / 2, bw, hh, bw / 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  function gridlines(ctx, w, h, line) {
+    ctx.fillStyle = line;
+    for (var y = 2020; y <= 2026; y++) {
+      ctx.fillRect(Math.round(YEAR_WEEK(y) / WEEKS * w), 0, 1, h);
+    }
+  }
+
+  function drawLane(canvas) {
+    var kind = canvas.dataset.lane;
+    var s = setup(canvas), ctx = s.ctx, w = s.w, h = s.h;
+    if (!w) return;
+    var line = css(canvas, "--line"), muted = css(canvas, "--muted"), ink = css(canvas, "--ink");
+    var lit = progress * w;
+
+    if (kind === "axis") {
+      ctx.font = "11px " + css(canvas, "--mono");
+      ctx.fillStyle = muted;
+      ctx.textBaseline = "middle";
+      var step = w < 420 ? 2 : 1;
+      for (var y = 2019; y <= 2026; y += step) {
+        ctx.fillText(String(y), YEAR_WEEK(y) / WEEKS * w + (y === 2019 ? 0 : 5), h / 2);
+      }
+      gridlines(ctx, w, h, line);
+      return;
+    }
+
+    gridlines(ctx, w, h, line);
+    var color = css(canvas, "--track");
+
+    if (kind === "capone") {
+      ROLES.forEach(function (r) {
+        var x1 = YEAR_WEEK(r.from) / WEEKS * w + 2;
+        var x2 = (r.to ? YEAR_WEEK(r.to) : WEEKS) / WEEKS * w - 2;
+        var bh = r.level * h;
+        var shown = Math.max(0, Math.min(1, (lit - x1) / (x2 - x1)));
+        ctx.globalAlpha = r.alpha * 0.28;
+        ctx.fillStyle = color;
+        pill(ctx, x1, (h - bh) / 2, x2 - x1, bh, 7);
+        ctx.fill();
+        if (shown > 0) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(x1, 0, (x2 - x1) * shown, h);
+          ctx.clip();
+          ctx.globalAlpha = r.alpha;
+          pill(ctx, x1, (h - bh) / 2, x2 - x1, bh, 7);
+          ctx.fill();
+          ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+        ctx.font = "500 11px " + css(canvas, "--mono");
+        var text = r.label;
+        if (ctx.measureText(text).width > x2 - x1 - 16) text = text.split(" ")[0];
+        if (ctx.measureText(text).width <= x2 - x1 - 12) {
+          ctx.fillStyle = css(canvas, "--paper");
+          ctx.textBaseline = "middle";
+          ctx.fillText(text, x1 + 9, h / 2 + 0.5);
+        }
+      });
+    } else {
+      var pts = DATA[kind];
+      var first = pts[0][0], last = pts[pts.length - 1][0] + 1;
+      ctx.globalAlpha = 0.11;
+      ctx.fillStyle = color;
+      pill(ctx, first / WEEKS * w - 3, 5, (last - first) / WEEKS * w + 6, h - 10, 7);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      drawWave(ctx, bars(pts, 0, WEEKS, w), 0, h / 2, h - 16, color, lit);
+    }
+
+    if (progress > 0 && progress < 1) {
+      ctx.fillStyle = ink;
+      ctx.fillRect(Math.round(lit), 0, 1.5, h);
+    }
+  }
+
+  function drawMini(canvas) {
+    var pts = DATA[canvas.dataset.mini];
+    var s = setup(canvas);
+    if (!s.w) return;
+    var first = pts[0][0], last = pts[pts.length - 1][0] + 1;
+    var span = Math.max(last - first, 12);
+    s.ctx.fillStyle = css(canvas, "--line");
+    s.ctx.fillRect(0, Math.round(s.h / 2), s.w, 1);
+    drawWave(s.ctx, bars(pts, first, first + span, s.w), 0, s.h / 2, s.h - 4, css(canvas, "--track"), s.w);
+  }
+
+  var lanes = Array.prototype.slice.call(document.querySelectorAll("canvas[data-lane]"));
+  var minis = Array.prototype.slice.call(document.querySelectorAll("canvas[data-mini]"));
+  function drawAll() { lanes.forEach(drawLane); minis.forEach(drawMini); }
+
+  // One pass of a playhead across the session, then it rests fully lit.
+  function play() {
+    var start = null, DURATION = 2200;
+    function frame(t) {
+      if (start === null) start = t;
+      var k = Math.min(1, (t - start) / DURATION);
+      progress = 1 - Math.pow(1 - k, 2.2);
+      if (k >= 1) progress = 1;
+      lanes.forEach(drawLane);
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  drawAll();
+  if (window.ResizeObserver) new ResizeObserver(drawAll).observe(document.getElementById("session"));
+  window.addEventListener("resize", drawAll);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
+  if (!reduced) setTimeout(play, 350);
+})();
+</script>
 
 </body>
 </html>

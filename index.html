@@ -9,26 +9,29 @@
 <meta property="og:description" content="I build small, complete things for real people. Principal Associate at Capital One, with side projects that people depend on.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jeremyhancock.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C1413'/%3E%3Cg fill='%23EDB949'%3E%3Crect x='13' y='26' width='5' height='12' rx='2.5'/%3E%3Crect x='22' y='16' width='5' height='32' rx='2.5'/%3E%3Crect x='31' y='22' width='5' height='20' rx='2.5'/%3E%3Crect x='40' y='11' width='5' height='42' rx='2.5'/%3E%3Crect x='49' y='27' width='5' height='10' rx='2.5'/%3E%3C/g%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B0E14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0E14'/%3E%3Crect x='13' y='26' width='5' height='12' rx='2.5' fill='%237DB1F5'/%3E%3Crect x='22' y='16' width='5' height='32' rx='2.5' fill='%23F2B63C'/%3E%3Crect x='31' y='22' width='5' height='20' rx='2.5' fill='%23F27D6B'/%3E%3Crect x='40' y='11' width='5' height='42' rx='2.5' fill='%23B79BF2'/%3E%3Crect x='49' y='27' width='5' height='10' rx='2.5' fill='%235FD0C0'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one left-aligned column, 70rem wide. Every project has its own color, like a track
-   in a recording session, and carries a small waveform of its real commit history. */
+/* Layout: a night-dark page carrying five colors, one per body of work, like tracks in a
+   recording session. Work that is running gets a panel filled with its color; shelved work
+   gets the same panel in outline. The ribbons under the headline are the five colors in motion.
+   One look only, by choice: there is no light theme. */
 :root {
-  --paper: #F3F4EF;
-  --surface: #FFFFFF;
-  --ink: #131C1A;
-  --muted: #56625E;
-  --line: #D5DAD2;
-  --hl: #F5C542;
+  color-scheme: dark;
+  --paper: #0B0E14;
+  --ink: #F3F1EA;
+  --muted: #A3A9B5;
+  --line: #262B39;
+  --on: #0E1116;
 
-  --t-capone: #2F6BB5;
-  --t-parkers: #B07A0A;
-  --t-janell: #CC4B3A;
-  --t-agentcafe: #7A4FC0;
-  --t-memory: #1E7F76;
+  --t-capone: #7DB1F5;
+  --t-parkers: #F2B63C;
+  --t-janell: #F27D6B;
+  --t-agentcafe: #B79BF2;
+  --t-memory: #5FD0C0;
 
   --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -37,26 +40,10 @@
   --step--1: 0.8125rem;
   --step-0: 1.0625rem;
   --step-1: 1.25rem;
-  --step-2: clamp(1.75rem, 3vw, 2.25rem);
+  --step-2: clamp(2.1rem, 5.4vw, 3.75rem);
   --step-3: clamp(2rem, 4.2vw, 2.75rem);
   --step-4: clamp(3rem, 9.6vw, 7.25rem);
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0C1413;
-    --surface: #131D1B;
-    --ink: #ECEFE9;
-    --muted: #97A49F;
-    --line: #233230;
-    --hl: #7A5B00;
-
-    --t-capone: #6FA8E8;
-    --t-parkers: #EDB949;
-    --t-janell: #F0816E;
-    --t-agentcafe: #B693E8;
-    --t-memory: #5CC9BC;
-    color-scheme: dark;
-  }
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -69,13 +56,13 @@ body {
   font-size: var(--step-0);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 h1, h2, h3, p, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
-a { color: var(--ink); text-decoration-color: var(--muted); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
-a:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
-::selection { background: var(--hl); color: var(--ink); }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--t-parkers); color: var(--on); }
 
 .wrap {
   max-width: 70rem;
@@ -84,7 +71,6 @@ a:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
 
-/* track colors: set once per element, used by everything inside it */
 [data-track="capone"] { --track: var(--t-capone); }
 [data-track="parkers"] { --track: var(--t-parkers); }
 [data-track="janell"] { --track: var(--t-janell); }
@@ -113,11 +99,13 @@ a:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
   font-size: var(--step--1);
   color: var(--muted);
   text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: color 0.2s, background-size 0.3s var(--ease);
 }
-.top nav a:hover { color: var(--ink); text-decoration: underline; }
+.top nav a:hover { color: var(--ink); background-size: 100% 1px; }
 
 /* ---------- hero ---------- */
-.hero { padding-block: clamp(2rem, 6vw, 4.5rem) clamp(3.5rem, 8vw, 6.5rem); }
+.hero { padding-block: clamp(2rem, 6vw, 4.5rem) 0; }
 .eyebrow {
   font-family: var(--mono);
   font-size: var(--step--1);
@@ -134,10 +122,15 @@ h1 {
   max-width: 11em;
   text-wrap: balance;
 }
+h1 .w { display: inline-block; animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i) * 70ms); }
 .hl {
-  background: linear-gradient(transparent 56%, var(--hl) 56%, var(--hl) 90%, transparent 90%);
-  padding-inline: 0.06em;
-  margin-inline: -0.06em;
+  color: var(--on);
+  padding-inline: 0.08em;
+  margin-inline: -0.02em;
+  border-radius: 0.12em;
+  background: linear-gradient(var(--t-parkers), var(--t-parkers)) 0 50% / 100% 86% no-repeat;
+  animation: rise 0.9s var(--ease) both, sweep 0.8s var(--ease) 0.75s both;
+  animation-delay: calc(var(--i) * 70ms), 0.75s;
 }
 .lede {
   max-width: 36em;
@@ -145,32 +138,20 @@ h1 {
   font-size: var(--step-1);
   line-height: 1.5;
   color: var(--muted);
+  animation: rise 0.9s var(--ease) 0.7s both;
 }
 .lede strong { color: var(--ink); font-weight: 600; }
+.ribbons { margin-top: clamp(0.5rem, 2vw, 1.5rem); animation: fade 1.6s ease 0.5s both; }
+.ribbons canvas { display: block; width: 100%; height: clamp(190px, 27vw, 340px); }
 
-/* ---------- status chip ---------- */
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  font-family: var(--mono);
-  font-size: var(--step--1);
-  color: var(--muted);
-  white-space: nowrap;
-}
-.status::before {
-  content: "";
-  width: 0.6em;
-  height: 0.6em;
-  border-radius: 50%;
-  background: var(--track, var(--muted));
-  flex: none;
-}
-.status.shelved::before { background: transparent; border: 1.5px solid var(--track, var(--muted)); }
+@keyframes rise { from { opacity: 0; transform: translateY(0.4em); } }
+@keyframes sweep { from { background-size: 0 86%; color: var(--ink); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes drift { to { background-position: 200% 50%; } }
 
 /* ---------- sections ---------- */
-section { padding-block: clamp(2.75rem, 6.5vw, 5rem); border-top: 1px solid var(--line); }
-.section-head { max-width: 40em; margin-bottom: clamp(1.75rem, 4vw, 3rem); }
+section { padding-block: clamp(2rem, 5vw, 3.75rem); }
+.section-head { max-width: 40em; margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem); }
 h2.title {
   font-family: var(--display);
   font-weight: 700;
@@ -180,106 +161,173 @@ h2.title {
   text-wrap: balance;
 }
 .section-head p { margin-top: 1rem; color: var(--muted); }
+.stack-of-panels { display: grid; gap: clamp(1rem, 2.5vw, 1.75rem); }
 
-/* ---------- day job ---------- */
-.job {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-  gap: 2rem 4rem;
-  align-items: start;
+/* ---------- panels ---------- */
+.panel {
+  border-radius: clamp(20px, 3vw, 32px);
+  padding: clamp(1.4rem, 4vw, 3rem);
+  background: var(--pbg);
+  color: var(--pfg);
+  min-width: 0;
 }
-.job .prose { max-width: 36em; display: grid; gap: 1rem; }
-.roles li {
-  display: grid;
-  grid-template-columns: 7.5rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: baseline;
-  padding-block: 0.8rem;
-  border-top: 1px solid var(--line);
-  line-height: 1.4;
+.panel.filled {
+  --pbg: var(--track);
+  --pfg: var(--on);
+  --pmuted: rgba(14, 17, 22, 0.76);
+  --pline: rgba(14, 17, 22, 0.2);
+  --wave: var(--on);
+  --chip-bg: var(--on);
+  --chip-fg: var(--track);
 }
-.roles li:first-child { border-top: 0; padding-top: 0.3rem; }
-.years {
+.panel.outlined {
+  --pbg: color-mix(in srgb, var(--track) 7%, transparent);
+  --pfg: var(--ink);
+  --pmuted: var(--muted);
+  --pline: color-mix(in srgb, var(--track) 34%, transparent);
+  --wave: var(--track);
+  --chip-bg: transparent;
+  --chip-fg: var(--track);
+  border: 1.5px solid var(--pline);
+}
+.panel-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.3em 0.85em;
+  border-radius: 99px;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  border: 1.5px solid var(--chip-fg);
   font-family: var(--mono);
   font-size: var(--step--1);
-  color: var(--track, var(--muted));
-  font-variant-numeric: tabular-nums;
+  font-weight: 500;
   white-space: nowrap;
 }
+.filled .status { border-color: var(--on); }
+.status::before { content: ""; width: 0.55em; height: 0.55em; border-radius: 50%; background: currentColor; }
+.outlined .status::before { background: transparent; border: 1.5px solid currentColor; }
+.filled .status.pulse::before { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.25; } }
 
-/* ---------- project rows ---------- */
-.project {
-  display: grid;
-  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
-  gap: 1.25rem 4rem;
-  padding-block: 2.5rem;
-  border-top: 1px solid var(--line);
-}
-.project:first-of-type { border-top: 0; padding-top: 0; }
-.project:last-of-type { padding-bottom: 0; }
-.rail { display: flex; flex-direction: column; gap: 0.9rem; align-items: flex-start; }
-.history { width: 100%; }
-.history canvas { display: block; width: 100%; height: 52px; }
+.history { flex: 1 1 16rem; max-width: 30rem; min-width: 0; }
+.history canvas { display: block; width: 100%; height: 56px; }
 .history figcaption {
-  margin-top: 0.3rem;
+  margin-top: 0.25rem;
+  text-align: right;
   font-family: var(--mono);
   font-size: 0.75rem;
-  color: var(--muted);
+  color: var(--pmuted);
 }
-.stack {
-  font-family: var(--mono);
-  font-size: var(--step--1);
-  line-height: 1.75;
-  color: var(--muted);
-}
-.story { min-width: 0; max-width: 40em; }
-.story h3 {
+
+.panel h3, .panel h2 {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: var(--step-2);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
-.story h3 a { text-decoration: none; }
-.story h3 a::after { content: " \2197"; color: var(--track); font-weight: 500; }
-.story h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
-.tagline { margin-top: 0.45rem; font-style: italic; color: var(--muted); }
-.story > p:not(.tagline) { margin-top: 1rem; }
-.receipts { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
-.receipts li { position: relative; padding-left: 1.4rem; }
+.outlined h3 { color: var(--track); }
+.tagline { margin-top: 0.6rem; font-size: var(--step-1); font-style: italic; color: var(--pmuted); }
+.panel-body {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 2rem clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(1.5rem, 3.5vw, 2.5rem);
+  padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
+  border-top: 1.5px solid var(--pline);
+}
+.pitch { display: grid; gap: 1.25rem; align-content: start; justify-items: start; }
+.pitch p { font-size: var(--step-1); line-height: 1.45; font-weight: 500; }
+.pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pills li {
+  padding: 0.2em 0.7em;
+  border: 1px solid var(--pline);
+  border-radius: 99px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--pmuted);
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.2em;
+  border-radius: 99px;
+  background: var(--pfg);
+  color: var(--paper);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease);
+}
+.filled .cta { color: var(--track); }
+.cta span { display: inline-block; transition: transform 0.25s var(--ease); }
+.cta:hover { transform: translateY(-2px); }
+.cta:hover span { transform: translate(3px, -3px); }
+.receipts { display: grid; gap: 0.75rem; align-content: start; }
+.receipts li { position: relative; padding-left: 1.5rem; }
 .receipts li::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0.72em;
-  width: 0.7rem;
+  width: 0.75rem;
   height: 2px;
   border-radius: 1px;
-  background: var(--track);
+  background: var(--wave);
 }
 .num { font-family: var(--mono); font-size: 0.92em; font-variant-numeric: tabular-nums; }
 
-/* ---------- principles ---------- */
-.principles {
+/* day job panel */
+.job-body {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2.25rem 4rem;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 2rem clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(1.5rem, 3.5vw, 2.5rem);
+  padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
+  border-top: 1.5px solid var(--pline);
 }
+.job-body .prose { display: grid; gap: 1rem; align-content: start; }
+.job-body .prose p:first-child { font-size: var(--step-1); line-height: 1.45; font-weight: 500; }
+.roles li {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 0.85rem;
+  border-top: 1.5px solid var(--pline);
+  line-height: 1.4;
+}
+.roles li:first-child { border-top: 0; padding-top: 0.2rem; }
+.years { font-family: var(--mono); font-size: var(--step--1); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------- principles ---------- */
+.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.25rem 4rem; }
 .principles h3 {
   font-family: var(--display);
   font-weight: 700;
-  font-size: var(--step-1);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.4rem;
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
 }
+.principles div:nth-child(1) h3 { color: var(--t-parkers); }
+.principles div:nth-child(2) h3 { color: var(--t-memory); }
+.principles div:nth-child(3) h3 { color: var(--t-janell); }
+.principles div:nth-child(4) h3 { color: var(--t-agentcafe); }
 .principles p { color: var(--muted); max-width: 30em; }
 
 /* ---------- about ---------- */
-.about {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
-  gap: 2.5rem 4rem;
-}
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 19rem); gap: 2.5rem 4rem; }
 .about .prose { max-width: 36em; display: grid; gap: 1rem; }
 .about h3 {
   font-family: var(--mono);
@@ -299,26 +347,45 @@ h2.title {
 .tools li:first-child { border-top: 0; padding-top: 0; }
 
 /* ---------- footer ---------- */
-footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
+footer { padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
 .signoff {
+  display: inline-block;
   font-family: var(--display);
   font-weight: 800;
   font-size: var(--step-4);
-  line-height: 0.94;
+  line-height: 1.05;
   letter-spacing: -0.04em;
+  background: linear-gradient(90deg, var(--t-parkers), var(--t-janell), var(--t-agentcafe), var(--t-capone), var(--t-memory), var(--t-parkers)) 0 50% / 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: drift 14s linear infinite;
 }
-.links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 1.75rem; font-size: var(--step-1); font-weight: 600; }
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+.links a {
+  padding: 0.7em 1.3em;
+  border: 1.5px solid var(--line);
+  border-radius: 99px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.25s var(--ease);
+}
+.links a:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* ---------- scroll reveal (only when the script is running) ---------- */
+.js .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.9s var(--ease); }
+.js .reveal.in { opacity: 1; transform: none; }
 
 @media (max-width: 760px) {
-  .about, .job, .project, .principles { grid-template-columns: minmax(0, 1fr); }
-  .project { gap: 1rem; }
-  .rail { gap: 0.6rem; }
-  .stack { line-height: 1.6; }
-  .stack br { display: none; }
-  .stack span::after { content: " · "; }
-  .stack span:last-child::after { content: ""; }
+  .about, .panel-body, .job-body, .principles { grid-template-columns: minmax(0, 1fr); }
+  .history { max-width: none; flex-basis: 100%; }
+  .history figcaption { text-align: left; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
@@ -340,212 +407,231 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
 
   <div class="wrap hero">
     <p class="eyebrow">Software engineer · Principal Associate at Capital One · Richmond, Virginia</p>
-    <h1>I build small, <span class="hl">complete</span> things for real people.</h1>
+    <h1 aria-label="I build small, complete things for real people.">
+      <span class="w" style="--i:0">I</span>
+      <span class="w" style="--i:1">build</span>
+      <span class="w" style="--i:2">small,</span>
+      <span class="w hl" style="--i:3">complete</span>
+      <span class="w" style="--i:4">things</span>
+      <span class="w" style="--i:5">for</span>
+      <span class="w" style="--i:6">real</span>
+      <span class="w" style="--i:7">people.</span>
+    </h1>
     <p class="lede">Websites, apps and APIs that someone actually uses. I care about the parts
     most side projects skip: <strong>security, privacy, tests,</strong> and what happens when
     something breaks.</p>
   </div>
+  <div class="ribbons" aria-hidden="true"><canvas id="ribbons"></canvas></div>
 
-  <section id="day-job" data-track="capone">
-    <div class="wrap job">
-      <div class="prose">
-        <h2 class="title">Capital One, since 2019</h2>
-        <p>I work on Capital One's internal server-driven UI platform, where the server
-        describes a screen and the client renders it. These days I'm on the front end, after
-        plenty of backend work along the way.</p>
-        <p>I came in as a contractor, was hired on two years later, and have been promoted
-        since.</p>
-      </div>
-      <ol class="roles">
-        <li>
-          <span class="years">2024 – now</span>
-          <span><strong>Principal Associate</strong>, Engineer 3</span>
-        </li>
-        <li>
-          <span class="years">2021 – 2024</span>
-          <span><strong>Senior Associate</strong>, Engineer 2</span>
-        </li>
-        <li>
-          <span class="years">2019 – 2021</span>
-          <span><strong>Contractor</strong>, through Strategic Staffing Solutions</span>
-        </li>
-      </ol>
+  <section id="day-job">
+    <div class="wrap">
+      <article class="panel filled reveal" data-track="capone">
+        <div class="panel-top">
+          <span class="status pulse">day job</span>
+        </div>
+        <h2>Capital One, since 2019</h2>
+        <div class="job-body">
+          <div class="prose">
+            <p>I work on Capital One's internal server-driven UI platform, where the server
+            describes a screen and the client renders it.</p>
+            <p>These days I'm on the front end, after plenty of backend work along the way. I
+            came in as a contractor, was hired on two years later, and have been promoted
+            since.</p>
+          </div>
+          <ol class="roles">
+            <li>
+              <span class="years">2024 – now</span>
+              <span><strong>Principal Associate</strong>, Engineer 3</span>
+            </li>
+            <li>
+              <span class="years">2021 – 2024</span>
+              <span><strong>Senior Associate</strong>, Engineer 2</span>
+            </li>
+            <li>
+              <span class="years">2019 – 2021</span>
+              <span><strong>Contractor</strong>, through Strategic Staffing Solutions</span>
+            </li>
+          </ol>
+        </div>
+      </article>
     </div>
   </section>
 
   <section id="work">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 class="title">Side projects that people depend on</h2>
       </div>
+      <div class="stack-of-panels">
 
-      <article class="project" id="parkers" data-track="parkers">
-        <div class="rail">
-          <span class="status">live</span>
-          <figure class="history">
-            <canvas data-mini="parkers" aria-hidden="true"></canvas>
-            <figcaption>commits, Mar 2023 to now</figcaption>
-          </figure>
-          <p class="stack">
-            <span>HTML, CSS, JS</span><br>
-            <span>Python on Lambda</span><br>
-            <span>API Gateway</span><br>
-            <span>CloudFront + S3</span><br>
-            <span>DynamoDB</span><br>
-            <span>SES, Cognito</span><br>
-            <span>GitHub Actions</span>
-          </p>
-        </div>
-        <div class="story">
-          <h3><a href="https://parkersdiamonddetailing.com">Parker's Diamond Detailing</a></h3>
+        <article class="panel filled reveal" id="parkers" data-track="parkers">
+          <div class="panel-top">
+            <span class="status pulse">live</span>
+            <figure class="history">
+              <canvas data-mini="parkers" aria-hidden="true"></canvas>
+              <figcaption>commits, Mar 2023 to now</figcaption>
+            </figure>
+          </div>
+          <h3>Parker's Diamond Detailing</h3>
           <p class="tagline">The website and back office for a mobile auto-detailing business.</p>
-          <p>My son runs a detailing business around Richmond. I built the site that brings in
-          his customers and the system behind it, and I keep it running.</p>
-          <ul class="receipts">
-            <li><strong>No framework and no build step.</strong> The front end is plain HTML, CSS
-            and JavaScript, so there is very little to break and nothing to upgrade on a
-            schedule.</li>
-            <li><strong>One server, everywhere.</strong> The same Lambda handler runs in
-            production and on my laptop, with AWS swapped for local stand-ins, so what I test
-            is what ships.</li>
-            <li><strong>Deploys by branch.</strong> A push to QA goes to QA and a push to main
-            goes to production, after the Jest and pytest suites pass.</li>
-            <li><strong>A phone-first customer book</strong> for jobs and before/after photos,
-            with an outbox that holds changes when the signal drops. It is in testing with the
-            one person it was built for.</li>
-            <li>More than <span class="num">750</span> commits since March 2023, and no secret
-            in any of them.</li>
-          </ul>
-        </div>
-      </article>
+          <div class="panel-body">
+            <div class="pitch">
+              <p>My son runs a detailing business around Richmond. I built the site that
+              brings in his customers and the system behind it, and I keep it running.</p>
+              <ul class="pills" aria-label="Built with">
+                <li>HTML, CSS, JS</li><li>Python on Lambda</li><li>API Gateway</li>
+                <li>CloudFront + S3</li><li>DynamoDB</li><li>SES</li><li>Cognito</li>
+                <li>GitHub Actions</li>
+              </ul>
+              <a class="cta" href="https://parkersdiamonddetailing.com">Visit the site <span aria-hidden="true">↗</span></a>
+            </div>
+            <ul class="receipts">
+              <li><strong>No framework and no build step.</strong> The front end is plain HTML,
+              CSS and JavaScript, so there is very little to break and nothing to upgrade on a
+              schedule.</li>
+              <li><strong>One server, everywhere.</strong> The same Lambda handler runs in
+              production and on my laptop, with AWS swapped for local stand-ins, so what I
+              test is what ships.</li>
+              <li><strong>Deploys by branch.</strong> A push to QA goes to QA and a push to
+              main goes to production, after the Jest and pytest suites pass.</li>
+              <li><strong>A phone-first customer book</strong> for jobs and before/after
+              photos, with an outbox that holds changes when the signal drops. It is in
+              testing with the one person it was built for.</li>
+              <li>More than <span class="num">750</span> commits since March 2023, and no
+              secret in any of them.</li>
+            </ul>
+          </div>
+        </article>
 
-      <article class="project" id="janells-run" data-track="janell">
-        <div class="rail">
-          <span class="status">in use</span>
-          <figure class="history">
-            <canvas data-mini="janell" aria-hidden="true"></canvas>
-            <figcaption>commits, May 2026 to now</figcaption>
-          </figure>
-          <p class="stack">
-            <span>Swift, SwiftUI</span><br>
-            <span>SwiftData</span><br>
-            <span>CloudKit sync</span><br>
-            <span>HealthKit, read-only</span><br>
-            <span>Sign in with Apple</span><br>
-            <span>Cloudflare Worker</span>
-          </p>
-        </div>
-        <div class="story">
-          <h3><a href="https://github.com/JeremyHancock/JanellsRunApp">Janell's Run</a></h3>
+        <article class="panel filled reveal" id="janells-run" data-track="janell">
+          <div class="panel-top">
+            <span class="status pulse">in use</span>
+            <figure class="history">
+              <canvas data-mini="janell" aria-hidden="true"></canvas>
+              <figcaption>commits, May 2026 to now</figcaption>
+            </figure>
+          </div>
+          <h3>Janell's Run</h3>
           <p class="tagline">An iOS app for tracking races, with exactly one target user.</p>
-          <p>My wife runs races and wanted her results, PRs and history in one place. She uses
-          it, files feedback from inside the app, and I ship the fixes.</p>
-          <ul class="receipts">
-            <li><strong>Zero third-party dependencies.</strong> About
-            <span class="num">3,600</span> lines of Swift, with unit tests that run on every
-            pull request.</li>
-            <li><strong>Her data stays hers.</strong> It syncs through her own private iCloud
-            database, and the app only ever reads from Health.</li>
-            <li><strong>Imports years of race history</strong> from CSV files and Athlinks.</li>
-            <li><strong>Feedback becomes a GitHub issue</strong> through a small Cloudflare
-            Worker. It is rate-limited, and it strips names before anything reaches the public
-            repo.</li>
-          </ul>
-        </div>
-      </article>
+          <div class="panel-body">
+            <div class="pitch">
+              <p>My wife runs races and wanted her results, PRs and history in one place. She
+              uses it, files feedback from inside the app, and I ship the fixes.</p>
+              <ul class="pills" aria-label="Built with">
+                <li>Swift, SwiftUI</li><li>SwiftData</li><li>CloudKit sync</li>
+                <li>HealthKit, read-only</li><li>Sign in with Apple</li><li>Cloudflare Worker</li>
+              </ul>
+              <a class="cta" href="https://github.com/JeremyHancock/JanellsRunApp">See the code <span aria-hidden="true">↗</span></a>
+            </div>
+            <ul class="receipts">
+              <li><strong>Zero third-party dependencies.</strong> About
+              <span class="num">3,600</span> lines of Swift, with unit tests that run on every
+              pull request.</li>
+              <li><strong>Her data stays hers.</strong> It syncs through her own private iCloud
+              database, and the app only ever reads from Health.</li>
+              <li><strong>Imports years of race history</strong> from CSV files and
+              Athlinks.</li>
+              <li><strong>Feedback becomes a GitHub issue</strong> through a small Cloudflare
+              Worker. It is rate-limited, and it strips names before anything reaches the
+              public repo.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
   <section id="shelved">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 class="title">Shelved, and proud of them</h2>
         <p>Two projects about AI agents acting for people while the person stays in control.
         I built both in 2026 and shut them down that June. The engineering held up. I never
         found real demand, and a trust-and-security product run by one person can't honestly
         make the promises it needs to make. Both repos are still public.</p>
       </div>
+      <div class="stack-of-panels">
 
-      <article class="project" id="agentcafe" data-track="agentcafe">
-        <div class="rail">
-          <span class="status shelved">shelved Jun 2026</span>
-          <figure class="history">
-            <canvas data-mini="agentcafe" aria-hidden="true"></canvas>
-            <figcaption>commits, Feb to Apr 2026</figcaption>
-          </figure>
-          <p class="stack">
-            <span>Python 3.12, FastAPI</span><br>
-            <span>SQLite</span><br>
-            <span>MCP</span><br>
-            <span>RS256 JWTs</span><br>
-            <span>WebAuthn passkeys</span><br>
-            <span>Docker on Fly.io</span>
-          </p>
-        </div>
-        <div class="story">
-          <h3><a href="https://github.com/JeremyHancock/AgentCafe">AgentCafe</a></h3>
+        <article class="panel outlined reveal" id="agentcafe" data-track="agentcafe">
+          <div class="panel-top">
+            <span class="status">shelved Jun 2026</span>
+            <figure class="history">
+              <canvas data-mini="agentcafe" aria-hidden="true"></canvas>
+              <figcaption>commits, Feb to Apr 2026</figcaption>
+            </figure>
+          </div>
+          <h3>AgentCafe</h3>
           <p class="tagline">The cafe for agents.</p>
-          <p>AI agents browse a Menu of real-world services, show a Passport proving a human
-          authorized them, and place orders. The Cafe sits in the middle and handles
-          authorization, consent and audit, so an agent never sees a backend URL or a
-          credential.</p>
-          <ul class="receipts">
-            <li><strong>Two tiers of permission.</strong> An agent can ask for read access by
-            itself. Anything that writes needs a human to approve it with a passkey.</li>
-            <li><strong>Checked twice on every order:</strong> the human's Passport and the
-            company's own policy, with budget, duration and scope limits.</li>
-            <li><strong>A tamper-evident audit log,</strong> hash-chained with SHA-256.</li>
-            <li><strong>An onboarding wizard</strong> that turns a company's OpenAPI spec into
-            a published service.</li>
-            <li><span class="num">405</span> tests and a pylint score of
-            <span class="num">10.00</span>.</li>
-          </ul>
-        </div>
-      </article>
+          <div class="panel-body">
+            <div class="pitch">
+              <p>AI agents browse a Menu of real-world services, show a Passport proving a
+              human authorized them, and place orders. The Cafe sits in the middle, so an
+              agent never sees a backend URL or a credential.</p>
+              <ul class="pills" aria-label="Built with">
+                <li>Python 3.12, FastAPI</li><li>SQLite</li><li>MCP</li><li>RS256 JWTs</li>
+                <li>WebAuthn passkeys</li><li>Docker on Fly.io</li>
+              </ul>
+              <a class="cta" href="https://github.com/JeremyHancock/AgentCafe">See the code <span aria-hidden="true">↗</span></a>
+            </div>
+            <ul class="receipts">
+              <li><strong>Two tiers of permission.</strong> An agent can ask for read access
+              by itself. Anything that writes needs a human to approve it with a passkey.</li>
+              <li><strong>Checked twice on every order:</strong> the human's Passport and the
+              company's own policy, with budget, duration and scope limits.</li>
+              <li><strong>A tamper-evident audit log,</strong> hash-chained with SHA-256.</li>
+              <li><strong>An onboarding wizard</strong> that turns a company's OpenAPI spec
+              into a published service.</li>
+              <li><span class="num">405</span> tests and a pylint score of
+              <span class="num">10.00</span>.</li>
+            </ul>
+          </div>
+        </article>
 
-      <article class="project" id="human-memory" data-track="memory">
-        <div class="rail">
-          <span class="status shelved">shelved Jun 2026</span>
-          <figure class="history">
-            <canvas data-mini="memory" aria-hidden="true"></canvas>
-            <figcaption>commits, Mar to Apr 2026</figcaption>
-          </figure>
-          <p class="stack">
-            <span>Python 3.12, FastAPI</span><br>
-            <span>SQLite, WAL + FTS5</span><br>
-            <span>MCP</span><br>
-            <span>RS256 JWTs</span><br>
-            <span>Jinja2 dashboard</span><br>
-            <span>Docker + Caddy</span>
-          </p>
-        </div>
-        <div class="story">
-          <h3><a href="https://github.com/JeremyHancock/human-memory">Human Memory</a></h3>
+        <article class="panel outlined reveal" id="human-memory" data-track="memory">
+          <div class="panel-top">
+            <span class="status">shelved Jun 2026</span>
+            <figure class="history">
+              <canvas data-mini="memory" aria-hidden="true"></canvas>
+              <figcaption>commits, Mar to Apr 2026</figcaption>
+            </figure>
+          </div>
+          <h3>Human Memory</h3>
           <p class="tagline">Memory for AI, owned by humans.</p>
-          <p>An API that gives AI agents persistent, structured memory across sessions. The
-          human it belongs to can see everything, decide which agent gets which access, and
-          delete any of it.</p>
-          <ul class="receipts">
-            <li><strong>Agents can store and search. Only the human can delete.</strong></li>
-            <li><strong>Scoped access tokens,</strong> shown once and never stored in
-            plaintext.</li>
-            <li><strong>Every query is isolated by namespace</strong> at the storage layer, and
-            the audit log never contains the stored values.</li>
-            <li><strong>Full-text search</strong> on SQLite FTS5, and passwordless sign-in by
-            magic link.</li>
-            <li><span class="num">474</span> tests.</li>
-          </ul>
-        </div>
-      </article>
+          <div class="panel-body">
+            <div class="pitch">
+              <p>An API that gives AI agents persistent, structured memory across sessions.
+              The human it belongs to can see everything, decide which agent gets which
+              access, and delete any of it.</p>
+              <ul class="pills" aria-label="Built with">
+                <li>Python 3.12, FastAPI</li><li>SQLite, WAL + FTS5</li><li>MCP</li>
+                <li>RS256 JWTs</li><li>Jinja2 dashboard</li><li>Docker + Caddy</li>
+              </ul>
+              <a class="cta" href="https://github.com/JeremyHancock/human-memory">See the code <span aria-hidden="true">↗</span></a>
+            </div>
+            <ul class="receipts">
+              <li><strong>Agents can store and search. Only the human can delete.</strong></li>
+              <li><strong>Scoped access tokens,</strong> shown once and never stored in
+              plaintext.</li>
+              <li><strong>Every query is isolated by namespace</strong> at the storage layer,
+              and the audit log never contains the stored values.</li>
+              <li><strong>Full-text search</strong> on SQLite FTS5, and passwordless sign-in
+              by magic link.</li>
+              <li><span class="num">474</span> tests.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
   <section id="how">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 class="title">How I work</h2>
       </div>
-      <div class="principles">
+      <div class="principles reveal">
         <div>
           <h3>Finish the unglamorous parts</h3>
           <p>Tests, CI, rate limits, audit logs, a privacy policy that matches what the code
@@ -573,7 +659,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
   </section>
 
   <section id="about">
-    <div class="wrap about">
+    <div class="wrap about reveal">
       <div class="prose">
         <h2 class="title">About</h2>
         <p>I've been writing software since a coding bootcamp in 2018, and doing it for a
@@ -584,8 +670,8 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
         stays in charge of software that acts for them. On the bench right now is a website
         template where each person shapes their own interface with an agent.</p>
         <p>Away from the keyboard I record music in Logic Pro: live audio, live MIDI, and
-        more stacked tracks than any song needs. The waveforms beside each project are
-        borrowed from there: they are that project's commit history.</p>
+        more stacked tracks than any song needs. The waveform on each project is borrowed
+        from there: it is that project's commit history.</p>
       </div>
       <div>
         <h3>What I reach for</h3>
@@ -606,7 +692,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
 </main>
 
 <footer>
-  <div class="wrap">
+  <div class="wrap reveal">
     <p class="signoff">Say hello.</p>
     <p class="links">
       <a href="https://github.com/JeremyHancock">GitHub</a>
@@ -619,6 +705,8 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
 <script>
 (function () {
   "use strict";
+  document.documentElement.classList.add("js");
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Weekly commit counts per project: [weeks since 2019-01-01, commits]. From `git log`, Nov 11, 2026.
   var DATA = {
@@ -631,6 +719,19 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
 
   function css(el, name) { return getComputedStyle(el).getPropertyValue(name).trim(); }
 
+  function fit(canvas) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+    }
+    var ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    return { ctx: ctx, w: w, h: h };
+  }
+
   function pill(ctx, x, y, w, h, r) {
     r = Math.min(r, w / 2, h / 2);
     ctx.beginPath();
@@ -642,45 +743,140 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(3rem, 8vw, 6rem
     ctx.closePath();
   }
 
-  function draw(canvas) {
+  /* ----- project waveforms: bars grow outward, left to right, when the panel arrives ----- */
+  function drawWave(canvas) {
     var pts = DATA[canvas.dataset.mini];
-    var dpr = window.devicePixelRatio || 1;
-    var w = canvas.clientWidth, h = canvas.clientHeight;
+    var s = fit(canvas), ctx = s.ctx, w = s.w, h = s.h;
     if (!w) return;
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    var ctx = canvas.getContext("2d");
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
+    var p = canvas._p === undefined ? 1 : canvas._p;
 
-    // Group weeks into bars at least 4px apart, so the waveform stays legible at any width.
+    // Group weeks into bars at least 4.5px apart, so the waveform stays legible at any width.
     var first = pts[0][0];
     var span = Math.max(pts[pts.length - 1][0] + 1 - first, 12);
-    var per = Math.max(1, Math.ceil(4 / (w / span)));
+    var per = Math.max(1, Math.ceil(4.5 / (w / span)));
     var n = Math.ceil(span / per), pitch = w / n, values = new Array(n).fill(0);
-    pts.forEach(function (p) {
-      var i = Math.floor((p[0] - first) / per);
-      if (i >= 0 && i < n) values[i] = Math.max(values[i], p[1]);
+    pts.forEach(function (pt) {
+      var i = Math.floor((pt[0] - first) / per);
+      if (i >= 0 && i < n) values[i] = Math.max(values[i], pt[1]);
     });
 
-    ctx.fillStyle = css(canvas, "--line");
-    ctx.fillRect(0, Math.round(h / 2), w, 1);
-    ctx.fillStyle = css(canvas, "--track");
-    var bw = Math.max(1.5, Math.min(pitch - 1.5, 5));
+    var color = css(canvas, "--wave");
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 0.25;
+    ctx.fillRect(0, Math.round(h / 2), w * Math.min(1, p * 1.5), 1);
+    ctx.globalAlpha = 1;
+    var bw = Math.max(1.5, Math.min(pitch - 1.5, 6));
     values.forEach(function (v, i) {
       if (!v) return;
-      var hh = Math.max(3, Math.sqrt(v / MAX) * (h - 4));
+      var local = Math.max(0, Math.min(1, p * 1.7 - (i / n) * 0.7));
+      var grow = 1 - Math.pow(1 - local, 3);
+      if (grow <= 0) return;
+      var hh = Math.max(3, Math.sqrt(v / MAX) * (h - 4)) * grow;
       pill(ctx, i * pitch + (pitch - bw) / 2, h / 2 - hh / 2, bw, hh, bw / 2);
       ctx.fill();
     });
   }
 
-  var minis = Array.prototype.slice.call(document.querySelectorAll("canvas[data-mini]"));
-  function drawAll() { minis.forEach(draw); }
-  drawAll();
-  window.addEventListener("resize", drawAll);
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+  function playWave(canvas) {
+    if (reduced) { canvas._p = 1; drawWave(canvas); return; }
+    var start = null;
+    function frame(t) {
+      if (start === null) start = t;
+      canvas._p = Math.min(1, (t - start) / 1500);
+      drawWave(canvas);
+      if (canvas._p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var waves = Array.prototype.slice.call(document.querySelectorAll("canvas[data-mini]"));
+  waves.forEach(function (c) { c._p = reduced ? 1 : 0; drawWave(c); });
+
+  /* ----- scroll reveal ----- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  function show(el) {
+    el.classList.add("in");
+    Array.prototype.forEach.call(el.querySelectorAll("canvas[data-mini]"), function (c) {
+      setTimeout(function () { playWave(c); }, 250);
+    });
+  }
+  if (reduced || !("IntersectionObserver" in window)) {
+    reveals.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    reveals.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ----- hero ribbons: the five track colors as slow, overlapping bands ----- */
+  var rc = document.getElementById("ribbons");
+  var COLORS = ["--t-capone", "--t-parkers", "--t-janell", "--t-agentcafe", "--t-memory"].map(function (n) {
+    return css(document.documentElement, n);
+  });
+  var TAU = Math.PI * 2;
+  function drawRibbons(time) {
+    var s = fit(rc), ctx = s.ctx, w = s.w, h = s.h;
+    if (!w) return;
+    var t = time / 1000;
+    ctx.globalCompositeOperation = "screen";
+    var STEP = 6;
+    for (var i = 0; i < 5; i++) {
+      var ph = i * 1.37;
+      var top = [], bottom = [];
+      for (var x = -STEP; x <= w + STEP; x += STEP) {
+        var u = x / w;
+        var mid = h * 0.5
+          + h * 0.2 * Math.sin(u * TAU * (0.75 + i * 0.11) + t * (0.16 + i * 0.027) + ph)
+          + h * 0.09 * Math.sin(u * TAU * (1.9 + i * 0.23) - t * (0.23 + i * 0.019) + ph * 2.1);
+        var half = h * (0.035 + 0.085 * (0.5 + 0.5 * Math.sin(u * TAU * (1.15 + i * 0.17) + t * (0.2 + i * 0.03) + ph * 3.3)));
+        top.push([x, mid - half]);
+        bottom.push([x, mid + half]);
+      }
+      var g = ctx.createLinearGradient(0, 0, w, 0);
+      g.addColorStop(0, COLORS[i]);
+      g.addColorStop(1, COLORS[(i + 2) % 5]);
+      ctx.fillStyle = g;
+      ctx.globalAlpha = 0.68;
+      ctx.beginPath();
+      ctx.moveTo(top[0][0], top[0][1]);
+      top.forEach(function (pt) { ctx.lineTo(pt[0], pt[1]); });
+      for (var k = bottom.length - 1; k >= 0; k--) ctx.lineTo(bottom[k][0], bottom[k][1]);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
+  }
+
+  var ribbonsVisible = true, running = false;
+  function loop(time) {
+    if (!ribbonsVisible) { running = false; return; }
+    drawRibbons(time);
+    requestAnimationFrame(loop);
+  }
+  function startRibbons() { if (!running && !reduced) { running = true; requestAnimationFrame(loop); } }
+  if (reduced) {
+    drawRibbons(42000);
+  } else {
+    drawRibbons(42000);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        ribbonsVisible = entries[0].isIntersecting;
+        if (ribbonsVisible) startRibbons();
+      }).observe(rc);
+    }
+    startRibbons();
+  }
+
+  window.addEventListener("resize", function () {
+    waves.forEach(drawWave);
+    if (reduced || !running) drawRibbons(42000);
+  });
 })();
 </script>
+
 </body>
 </html>

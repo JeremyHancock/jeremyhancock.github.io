@@ -305,6 +305,18 @@ h2.title {
 .roles li:first-child { border-top: 0; padding-top: 0.2rem; }
 .years { font-family: var(--mono); font-size: var(--step--1); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+/* ---------- what came after the shelved projects ---------- */
+.since { max-width: 40em; margin-top: clamp(1.5rem, 3.5vw, 2.5rem); }
+.since-label {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.since a { color: var(--t-agentcafe); font-weight: 600; }
+
 /* ---------- principles ---------- */
 .principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.25rem 4rem; }
 .principles h3 {
@@ -623,6 +635,14 @@ footer { padding-block: clamp(3rem, 8vw, 6rem) 4rem; }
           </div>
         </article>
 
+      </div>
+      <div class="since reveal">
+        <p class="since-label">Since then · November 2026</p>
+        <p>One idea from AgentCafe now stands alone as
+        <a href="https://github.com/JeremyHancock/undersigned" target="_blank" rel="noopener">undersigned</a>,
+        a small Python library. It lets an API check for itself that a specific person
+        approved what an AI agent is asking it to do, signed with that person's passkey. It
+        is a reference implementation with tests, not a product.</p>
       </div>
     </div>
   </section>
